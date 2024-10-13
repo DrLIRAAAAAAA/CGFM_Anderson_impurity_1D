@@ -1,29 +1,38 @@
-Anderson impurity solver based on the cumulant Green's functions method
-
-Solver for the Anderson impurity model using the cumulant Green's functions method (https://arxiv.org/abs/2409.16881)
+Anderson impurity model (AIM) solver based on the cumulant Green's functions method (CGFM)
+Solver for the Anderson impurity model (AIM) based on the cumulant Green's functions method (CGFM) (https://arxiv.org/abs/2409.16881). The method is based on the iterative construction and exact diagonalization of a finite chain containing a single correlated impurity site connected to a chain of uncorrelated sites. The eigenvectors and eigenvalues of the finite chain are used to obtain the atomic Green's functions for the chain using the Lehmann representation. Using the cumulant expansion, the atomic cumulants are obtained from the atomic Green's functions. The atomic cumulants are then used as approximations to the full cumulants to calculate the Green's functions for the infinite chain limit.
 
 Pre-requisites and how to install them
+.gfortran (https://fortran-lang.org/)
 
-. gfortran (https://fortran-lang.org/)
-    sudo apt-get install gfortran
-. LAPACK   (https://netlib.org/lapack/)
-    sudo apt-get install liblapack-dev
-. BLAS     (https://netlib.org/blas/)
-    sudo apt-get install libblas-dev 
+sudo apt-get install gfortran
+
+.LAPACK (https://netlib.org/lapack/)
+
+sudo apt-get install liblapack-dev
+
+.BLAS (https://netlib.org/blas/)
+
+sudo apt-get install libblas-dev 
 
 How to compile and run the code
+.Compiling
 
-. Compiling
-    gfortran -std=legacy -mcmodel=medium -o CGFM_Anderson_impurity_1D.exe CGFM_Anderson_impurity_1D.f90 -llapack -lblas
-    After compiling, the module files and the executable will be created.
-. Running
-    nohup ./CGFM_Anderson_impurity_1D.exe > CGFM_Anderson_impurity_1D.out &
-    Using the nohup command, the code runs in the background, freeing up the terminal. To check the execution status, use top.
-    While running, the temporary files fort.* are created. They can be removed after execution.
-    After running, the output files are created. More information about the output files below.
+gfortran -std=legacy -mcmodel=medium -o CGFM_Anderson_impurity_1D.exe CGFM_Anderson_impurity_1D.f90 -llapack -lblas
+
+After compiling, the module files and the executable will be created.
+
+.Running
+
+nohup ./CGFM_Anderson_impurity_1D.exe > CGFM_Anderson_impurity_1D.out &
+
+Using this command, the code runs in the background, freeing up the terminal. To check the execution status, use top.
+
+While running, the temporary files "fort.*" are created. They can be removed after the code is done running. After running, the output files containing the density of states and the occupations numbers are created.
+
+More details
+Check the "Anderson_impurity_solver.txt" for a detailed description of the code parameters, variables, subroutines, functions, and output files.
 
 Description of the important parameters and variables (in order of appearance)
-
 IN MAIN PROGRAM
 . LFIN:             DEFINES THE TOTAL NUMBER OF SITES IN THE CHAIN (LFIN-1 CONDUCTION SITES + 1 IMPURITY)
 . IZI:              DEFINES ON WHICH SITE THE GREEN'S FUNCTIONS WILL BE CALCULATED (IZI=LFIN MEANS ON THE LAST SITE, WHICH IS THE IMPURITY SITE)
@@ -72,7 +81,6 @@ IN SUBROUTINE DENSI2
 . OF:               ENDING FREQUENCY FOR THE DOS
 
 Subroutines and functions (in order of appearance)
-
 . PROGRAM AMHUBBARD: Main routine, defines the parameters of the model and calls other subroutines
 . OCUP:              calculates the occupation numbers for the infinite chain
 . DENSI2:            calculates the density of states for the infinite chain
@@ -98,35 +106,9 @@ Subroutines and functions (in order of appearance)
 . VALIN:             defines the operators and Hamiltonian for a single site
 
 Output files
-
 . CGFM_Anderson_impurity_1D.out
     Main output file. The file contains information about the execution of the program, such as: input parameters; Hamiltonian blocks with their respective charge, spin, and eigenvalues; lowest eigenvalue; partition function; among others.
 . 20241012_aocup_LFIN=2.dat
     Output file for the occupation numbers. The name contains the date the program was run (in YYYY-MM-DD format) and the number of sites in the chain. The file contains the temperature in column 1, the impurity gate energy divided by the Anderson parameter in column 2, the chemical potential in column 3, the electron correlation in column 4, the Friedel sum rule in column 5, the total vacuum occupation number in column 6, the total up spin occupation number in column 7, the total down spin occupation number in column 8, the total double spin occupation number in column 9, the total completeness number in column 10, and the total occupation number in column 11.
 . 20241012_adensity_LFIN=2.dat
     Output file for the density of states. The name contains the date the program was run (in YYYY-MM-DD format) and the number of sites in the chain. The file contains the frequency in column 1, the up spin density of states in column 2, and the down spin density of states in column 3.
-
-
-
-
-
-
-. NAS PRÓXIMAS VERSÕES DO CÓDIGO, DEFINIR OI, OF, NT, E ETTA PARA DENSI2 E OCUP NO PROGRAMA PRINCIPAL
-
-. Troquei  na densi2
-  RFN(J)=-CC*DIMAG(VZGFN(J))*PI*0.01D0
-  por
-  RFP(J)=-CC*DIMAG(VZGFP(J))*PI*ACOPparam
-  e
-  RFN(J)=-CC*DIMAG(VZGFN(J))*PI*0.01D0
-  por
-  RFN(J)=-CC*DIMAG(VZGFN(J))*PI*ACOPparam
-
-. Incluí a impressão do RFN(J) e removi a impressão do RMAJ(J) na densi2
-
-
-
-
-
-
-
