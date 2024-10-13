@@ -35,4 +35,4 @@ the infinite chain limit.
 
 ### More details
 
-Check the "Anderson_impurity_solver.txt" for a detailed description of the code parameters, variables, subroutines, functions, and output files.
+Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a detailed description of the code parameters, variables, subroutines, functions, and output files.
