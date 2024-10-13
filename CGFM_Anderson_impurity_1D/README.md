@@ -1,48 +1,57 @@
-Anderson impurity model (AIM) solver based on the cumulant Green's functions method (CGFM)
-Solver for the Anderson impurity model (AIM) based on the cumulant Green's functions method (CGFM) (https://arxiv.org/abs/2409.16881). The method is based on the iterative construction and exact diagonalization of a finite chain containing a single correlated impurity site connected to a chain of uncorrelated sites. The eigenvectors and eigenvalues of the finite chain are used to obtain the atomic Green's functions for the chain using the Lehmann representation. Using the cumulant expansion, the atomic cumulants are obtained from the atomic Green's functions. The atomic cumulants are then used as approximations to the full cumulants to calculate the Green's functions for the infinite chain limit.
 
-Pre-requisites and how to install them
-.gfortran (https://fortran-lang.org/)
+# Anderson impurity model (AIM) solver based on the cumulant Green's functions method (CGFM)
 
-sudo apt-get install gfortran
+Solver for the Anderson impurity model (AIM) based on the cumulant Green's functions method (CGFM) (https://arxiv.org/abs/2409.16881).
+The method is based on the iterative construction and exact diagonalization of a finite chain containing a single correlated impurity site connected to a chain of uncorrelated sites. The eigenvectors and eigenvalues of the finite chain are used to obtain the 
+atomic Green's functions for the chain using the Lehmann representation. Using the cumulant expansion, the atomic cumulants are obtained from the atomic Green's functions. The atomic cumulants are then used as approximations to the full cumulants to calculate the Green's functions for 
+the infinite chain limit.
 
-.LAPACK (https://netlib.org/lapack/)
+### Pre-requisites and how to install them
 
-sudo apt-get install liblapack-dev
+- gfortran (https://fortran-lang.org/)
 
-.BLAS (https://netlib.org/blas/)
+  `sudo apt-get install gfortran`
+- LAPACK   (https://netlib.org/lapack/)
 
-sudo apt-get install libblas-dev 
+  `sudo apt-get install liblapack-dev`
+- BLAS     (https://netlib.org/blas/)
 
-How to compile and run the code
-.Compiling
+  `sudo apt-get install libblas-dev `
 
-gfortran -std=legacy -mcmodel=medium -o CGFM_Anderson_impurity_1D.exe CGFM_Anderson_impurity_1D.f90 -llapack -lblas
+### How to compile and run the code
 
-After compiling, the module files and the executable will be created.
+- Compiling
 
-.Running
+  `gfortran -std=legacy -mcmodel=medium -o CGFM_Anderson_impurity_1D.exe CGFM_Anderson_impurity_1D.f90 -llapack -lblas`
 
-nohup ./CGFM_Anderson_impurity_1D.exe > CGFM_Anderson_impurity_1D.out &
+  After compiling, the module files and the executable will be created.
+  
+- Running
 
-Using this command, the code runs in the background, freeing up the terminal. To check the execution status, use top.
+  `nohup ./CGFM_Anderson_impurity_1D.exe > CGFM_Anderson_impurity_1D.out &`
 
-While running, the temporary files "fort.*" are created. They can be removed after the code is done running. After running, the output files containing the density of states and the occupations numbers are created.
+  Using this command, the code runs in the background, freeing up the terminal. To check the execution status, use `top`.
 
-More details
-Check the "Anderson_impurity_solver.txt" for a detailed description of the code parameters, variables, subroutines, functions, and output files.
+  While running, the temporary files "fort.*" are created. They can be removed after the code is done running. After running, the output files containing the density of states and the occupations numbers are created.
 
-Description of the important parameters and variables (in order of appearance)
+### More details
+
+Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a detailed description of the code parameters, variables, subroutines, functions, and output files.
+
+
+### Description of the important parameters and variables (in order of appearance)
 IN MAIN PROGRAM
-. LFIN:             DEFINES THE TOTAL NUMBER OF SITES IN THE CHAIN (LFIN-1 CONDUCTION SITES + 1 IMPURITY)
-. IZI:              DEFINES ON WHICH SITE THE GREEN'S FUNCTIONS WILL BE CALCULATED (IZI=LFIN MEANS ON THE LAST SITE, WHICH IS THE IMPURITY SITE)
-. IDOWN:            DEFINES IF THE DOWN SPIN GREEN'S FUNCTIONS SHOULD BE CALCULATED (IDOWN=0 MEANS UP SPIN ONLY; IDOWN=1 MEANS BOTH SPINS)
-. PRINTTRANSITIONS: DEFINES IF THE ATOMIC TRANSITIONS SHOULD BE PRINTED ON THE OUTPUT FILE (PRINTTRANSITIONS=0 MEANS NO; PRINTTRANSITIONS=1 MEANS YES)
-. ALLBLOCKS:        ALLBLOCKS DEFINES IF ALL BLOCKS OF THE HAMILTONIAN MATRIX SHOULD BE INCLUDED IN THE CALCULATIONS (ALLBLOCKS=0 ONLY CONSIDERS BLOCKS WHERE THE NUMBER OF ELECTRONS IS EQUAL TO LFIN, LFIN-1 OR LFIN+1; ALLBLOCKS=1 CONSIDERS ALL BLOCKS)
-. ACOPtI:           ELECTRON HOPPING TERM BETWEEN SITES OF THE CHAIN
-. D:                BANDWIDTH FOR THE ZERO ORDER DENSITY OF STATES
-. ACOPparam:        ANDERSON PARAMETER DELTA (THE ANDERSON PARAMETER DEFINES THE ENERGY SCALE)
-. ACOPhib:          HYBRIDIZATION V (THE HYBRIDIZATION BETWEEN THE IMPURITY SITE AND THE FIRST CONDUCTION SITE)
+- LFIN
+  
+DEFINES THE TOTAL NUMBER OF SITES IN THE CHAIN (LFIN-1 CONDUCTION SITES + 1 IMPURITY)
+- IZI:              DEFINES ON WHICH SITE THE GREEN'S FUNCTIONS WILL BE CALCULATED (IZI=LFIN MEANS ON THE LAST SITE, WHICH IS THE IMPURITY SITE)
+- IDOWN:            DEFINES IF THE DOWN SPIN GREEN'S FUNCTIONS SHOULD BE CALCULATED (IDOWN=0 MEANS UP SPIN ONLY; IDOWN=1 MEANS BOTH SPINS)
+- PRINTTRANSITIONS: DEFINES IF THE ATOMIC TRANSITIONS SHOULD BE PRINTED ON THE OUTPUT FILE (PRINTTRANSITIONS=0 MEANS NO; PRINTTRANSITIONS=1 MEANS YES)
+- ALLBLOCKS:        ALLBLOCKS DEFINES IF ALL BLOCKS OF THE HAMILTONIAN MATRIX SHOULD BE INCLUDED IN THE CALCULATIONS (ALLBLOCKS=0 ONLY CONSIDERS BLOCKS WHERE THE NUMBER OF ELECTRONS IS EQUAL TO LFIN, LFIN-1 OR LFIN+1; ALLBLOCKS=1 CONSIDERS ALL BLOCKS)
+- ACOPtI:           ELECTRON HOPPING TERM BETWEEN SITES OF THE CHAIN
+- D:                BANDWIDTH FOR THE ZERO ORDER DENSITY OF STATES
+- ACOPparam:        ANDERSON PARAMETER DELTA (THE ANDERSON PARAMETER DEFINES THE ENERGY SCALE)
+- ACOPhib:          HYBRIDIZATION V (THE HYBRIDIZATION BETWEEN THE IMPURITY SITE AND THE FIRST CONDUCTION SITE)
 . BETAI:            BETA=1/T
 . AMUI:             CHEMICAL POTENTIAL MU
 . ACOPUI:           STARTING ELECTRONIC CORRELATION U_i FOR THE CORRELATION LOOP
