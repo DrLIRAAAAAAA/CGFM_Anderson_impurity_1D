@@ -31,7 +31,7 @@ Solver for the Anderson impurity model (AIM) based on the cumulant Green's funct
 
   Using this command, the code runs in the background, freeing up the terminal. To check the execution status, use `top`.
 
-  While running, the temporary files "fort.*" are created. They can be removed after the code is done running. After running, the output files containing the density of states and the occupations numbers are created.
+  While running, the temporary files "fort.*" are created. They can be removed after the code has finished running. After running, the output files containing the density of states and the occupation numbers are created.
 
 ### More details
 
@@ -39,7 +39,7 @@ Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a det
 
 ### Description of the important parameters and variables (in order of appearance)
 
-#### In main program
+#### In the main program
 
 - LFIN:              defines the total number of sites in the chain (LFIN-1 conduction sites connected to 1 impurity);
 - IZI:               defines on which site the Green's functions will be calculated (IZI=LFIN means on the last site, which is the impurity site);
@@ -47,9 +47,9 @@ Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a det
 - PRINTTRANSITIONS:  defines if the atomic transitions should be printed on the output file (PRINTTRANSITIONS=0 means no; PRINTTRANSITIONS=1 means yes);
 - ALLBLOCKS:         defines if all blocks of the Hamiltonian matrix should be included in the calculations (ALLBLOCKS=0 only considers blocks where the number of electrons is equal to LFIN, LFIN-1 or LFIN+1; ALLBLOCKS=1 considers all blocks);
 - ACOPtI:            electron hopping term between sites of the chain;
-- D:                 bandwidth for the zero order density of states;
+- D:                 bandwidth for the zero-order density of states;
 - ACOPparam:         Anderson parameter DELTA (the Anderson parameter defines the energy scale);
-- ACOPhib:           hybridization V (the hybridization between the impurity site and the first conduction site);
+- ACOPhib:           hybridisation V (the hybridisation between the impurity site and the first conduction site);
 - BETAI:             BETA=1/T;
 - AMUI:              chemical potential MU;
 - ACOPUI:            starting electronic correlation U_i for the correlation loop;
@@ -67,13 +67,13 @@ Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a det
 - TKHaldane:         Kondo temperature T_K as calculated by Haldane;
 - A:                 starting frequency for the occupation numbers;
 - B:                 ending frequency for the occupation numbers;
-- COMPP:             completeness number calculated from up spin Green's functions;
-- SVACP:             vacuum occupation number calculated from up spin Green's functions;
+- COMPP:             completeness number calculated from up-spin Green's functions;
+- SVACP:             vacuum occupation number calculated from up-spin Green's functions;
 - SFUP:              up spin occupation number calculated from up spin Green's functions;
 - SFDP:              down spin occupation number calculated from up spin Green's functions;
 - SD2P:              double spin occupation number calculated from up spin Green's functions;
-- COMPN:             completeness number calculated from down spin Green's functions;
-- SVACN:             vacuum occupation number calculated from down spin Green's functions;
+- COMPN:             completeness number calculated from down-spin Green's functions;
+- SVACN:             vacuum occupation number calculated from down-spin Green's functions;
 - SFUN:              up spin occupation number calculated from down spin Green's functions;
 - SFDN:              down spin occupation number calculated from down spin Green's functions;
 - SD2N:              double spin occupation number calculated from down spin Green's functions;
@@ -96,21 +96,21 @@ Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a det
 - PROGRAM AMHUBBARD: main routine, defines the parameters of the model and calls other subroutines;
 - OCUP:              calculates the occupation numbers for the infinite chain;
 - DENSI2:            calculates the density of states for the infinite chain;
-- GKONDO:            calculates the frequency dependent up spin and down spin Green's functions for the finite chain using the residues (numerators) from MEOCUP and MEOCDOWN, and afterwards calculates the up spin and down spin Green's functions for the infinite chain;
+- GKONDO:            calculates the frequency-dependent up-spin and down-spin Green's functions for the finite chain using the residues (numerators) from MEOCUP and MEOCDOWN, and afterwards calculates the up-spin and down-spin Green's functions for the infinite chain;
 - RESIDUOS:          builds the finite chain by iteratively adding site by site;
 - SIMP:              Simpson integration;
 - FERM:              real Fermi function;
 - ZFER:              complex Fermi function;
-- MEOCUP:            calculates the residues (numerator) of the up spin Green's functions for the finite chain using the Lehmann representation;
-- MEOCDOWN:          calculates the residues (numerator) of the down spin Green's functions for the finite chain using the Lehmann representation;
+- MEOCUP:            calculates the residues (numerator) of the up-spin Green's functions for the finite chain using the Lehmann representation;
+- MEOCDOWN:          calculates the residues (numerator) of the down-spin Green's functions for the finite chain using the Lehmann representation;
 - LEE:               reads fort.* files that contain information about the Fock space from the previous iteration to be used in the current iteration;
 - TRANSFNEW:         transfers information about the Fock space from the current iteration to be used in the next iteration;
 - DEALLOC_IGSIS:     deallocates memory used to store charge and spin of the Hamiltonian blocks of the current iteration;
-- TCUPES1:           calculates the up spin creation operator of the current iteration;
-- TCDOWNES1:         calculates the down spin creation operator of the current iteration;
-- TCUPSIS:           calculates the up spin creation operator of the whole system;
+- TCUPES1:           calculates the up-spin creation operator of the current iteration;
+- TCDOWNES1:         calculates the down-spin creation operator of the current iteration;
+- TCUPSIS:           calculates the up-spin creation operator of the whole system;
 - TCDOWNSIS:         calculates the down spin creation operator of the whole system;
-- THSIS:             calculates the non-local elements of the Hamiltonian matrix, adds them to the local elements and diagonalizes the Hamiltonian matrix;
+- THSIS:             calculates the non-local elements of the Hamiltonian matrix, adds them to the local elements and diagonalises the Hamiltonian matrix;
 - CONECTIONS:        defines which Hamiltonian blocks connect to each other and to creation operators ;
 - ESTRUCTURA:        defines the size, charge, and spin of Hamiltonian blocks;
 - DEALLOC_ESP1:      deallocates memory used to store information about the Fock space of the current iteration;
@@ -121,28 +121,28 @@ Check the "README.md" inside the "CGFM_Anderson_impurity_1D" directory for a det
 
 - CGFM_Anderson_impurity_1D.out
 
-    Main output file. The file contains information about the execution of the program, such as: input parameters; Hamiltonian blocks with their respective charge, spin, and eigenvalues; lowest eigenvalue; partition function; and others.
+    Main output file. The file contains information about the execution of the program, such as input parameters; Hamiltonian blocks with their respective charge, spin, and eigenvalues; lowest eigenvalue; partition function; and others.
   
 - YYYYMMDD_aocup_LFIN=X.dat
   
     Output file for the occupation numbers. The name contains the date the program was run (in YYYYMMDD format) and the number of sites in the chain. The file is structured in the following way:
 
-  1. the temperature in column 1;
-  2. the impurity gate energy divided by the Anderson parameter in column 2;
-  3. the chemical potential in column 3;
-  4. the electron correlation in column 4;  
-  5. the Friedel sum rule in column 5;  
-  6. the total vacuum occupation number in column 6;  
-  7. the total up spin occupation number in column 7;  
-  8. the total down spin occupation number in column 8;  
-  9. the total double spin occupation number in column 9;  
-  10. the total completeness number in column 10;
-  11. the total occupation number in column 11.
+  1. The temperature in column 1;
+  2. The impurity gate energy divided by the Anderson parameter in column 2;
+  3. The chemical potential in column 3;
+  4. The electron correlation in column 4;  
+  5. The Friedel sum rule in column 5;  
+  6. The total vacuum occupation number in column 6;  
+  7. The total up-spin occupation number in column 7;  
+  8. The total down-spin occupation number in column 8;  
+  9. The total double spin occupation number in column 9;  
+  10. The total completeness number in column 10;
+  11. The total occupation number in column 11.
 
 - YYYYMMDD_adensity_LFIN=X.dat
 
     Output file for the density of states. The name contains the date the program was run (in YYYYMMDD format) and the number of sites in the chain. The file is structured in the following way:
 
-  1. the frequency in column 1;
-  2. the up spin density of states in column 2;
-  3. the down spin density of states in column 3.
+  1. The frequency in column 1;
+  2. The up-spin density of states in column 2;
+  3. The down-spin density of states in column 3.
